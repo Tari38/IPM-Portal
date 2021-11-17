@@ -1,0 +1,33 @@
+.App-header {
+	background-image: linear-gradient(to left bottom, #006cf8, #1357cf, #1543a7, #103082, #081e5e);
+  max-height: 300px;
+	box-shadow: 2px 3px 4px #000;
+}
+
+.App-logo {
+  height: 200px;
+  padding-left: 20px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+	.App-header {
+		transform: scaleY(0.9);
+		transition: 2s ease;
+	}
+	.App-logo {
+		transform: scale(0.78);
+		transition: 1.5s ease;
+		margin-left: -75px;
+	}
+}
+
+@media (max-width: 480px) {
+	.App-logo {
+		transform: scale(0.6);
+		transition: 1.5s ease;
+		margin-left: -75px;
+	}
+}
