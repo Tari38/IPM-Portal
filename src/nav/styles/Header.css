@@ -1,0 +1,64 @@
+.App-header {
+	background-image: linear-gradient(to left bottom, #006cf8, #1357cf, #1543a7, #103082, #081e5e);
+  max-height: 300px;
+}
+
+.App-logo {
+  max-height: 200px;
+  padding-left: 20px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+	.App-header {
+		transform: scaleY(0.9);
+		transition: 2s ease;
+	}
+	.App-logo {
+		transform: scale(0.78);
+		transition: 1.5s ease;
+		margin-left: -75px;
+	}
+}
+
+@media (max-width: 480px) {
+	.App-logo {
+		transform: scale(0.6);
+		transition: 1.5s ease;
+		margin-left: -75px;
+	}
+}
+
+.navbar {
+  display: flex;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: inherit;
+	/* box-shadow: 2px 3px 4px #000; */
+}
+
+#burger-toggler {
+	background-color: #fff;
+}
+
+#offcanvasNavbar {
+	background-image: linear-gradient(to left bottom, #006cf8, #1357cf, #1543a7, #103082, #081e5e);
+	color: #fff;
+}
+
+.offcanvasNavbarLabel {
+	font-family: "Montserrat Alternates", sans-serif;
+	color: #fff;
+	margin-top: 20px;
+}
+
+#link-text {
+	color: #fff;
+}
+
+.fa-user {
+	color: #fff;
+}

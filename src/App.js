@@ -1,65 +1,50 @@
-import * as React from "react";
-import { Route, Navigate } from 'react-router-dom';
-import Header from "./components/partials/Header";
-import Home from "./components/pages/Home";
-import Auth from "./components/auth/Auth";
-import Nav from "./components/Nav";
-import UserDashboard from "./components/auth/private/UserDashboard";
-import Callback from "./components/auth/Callback";
-import Public from "./components/pages/Public";
-import Private from "./components/auth/private/Private";
+import React from "react";
+import axios from "axios";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import Header from "./nav/Header";
+import Footer from "./components/Footer";
+import HomePage from "./pages/Home";
+import ProfilePage from "./pages/Profile";
+import DashboardPage from "./pages/Dashboard";
+import NothingHere from "./nav/NothingHere";
 
-import Footer from "./components/partials/Footer";
-import './App.css';
+import "./App.css";
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.auth = new Auth(this.props.history);
+export default class App extends React.Component {
+  state = {
+      users: [],
+    };
+    componentDidMount() {
+      axios.get("/userActions").then((response) => {
+        this.setState({ users: response.data });
+      });
     }
     render() {
-        return (
-            <>
-              <Header />
-                <Nav auth={this.auth} />
-                <div className="body">
-                    <Route
-                        path="/"
-                        exact
-                        render={props => <Home auth={this.auth} {...props} />}
-                    />
-                    <Route
-                        path="/callback"
-                        render={props => (
-                            <Callback auth={this.auth} {...props} />
-                        )}
-                    />
-                    <Route
-                        path="/userdashboard"
-                        render={props =>
-                            this.auth.isAuthenticated() ? (
-                                <UserDashboard auth={this.auth} {...props} />
-                            ) : (
-                                <Navigate to="/" />
-                            )
-                        }
-                    />
-                    <Route path="/public" component={Public} />
-                    <Route
-                        path="/private"
-                        render={props =>
-                            this.auth.isAuthenticated() ? (
-                                <Private auth={this.auth} {...props} />
-                            ) : (
-                                this.auth.login()
-                            )
-                        }
-                    />
-                </div>
-                <Footer />
-            </>
-        );
-    }
-}
+      const { users } = this.state;
+  return (
+    <>
+    <Router>
+      <main className="App">
+        <Header />
+        <Container>
+          <Routes>
+            <Route path="/" exact element={<HomePage />} />
+            <Route path="*" element={<NothingHere />}
 
-export default App;
+            {...users.map((user) => (
+              <>
+                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+              </>
+            ))}
+            />
+          </Routes>
+        </Container>
+      </main>
+      <Footer />
+    </Router>
+    </>
+  );
+ }
+}
